@@ -35,7 +35,7 @@ def get_response_2(user_query: str, recommend_db: Chroma):
     prompt_response = ChatPromptTemplate.from_template(template)
     llm3 = Ollama(model="llama3")
     full_chain = (
-            RunnablePassthrough.assign(context = get_context(user_query)) #mi da errore, da vedere meglio
+            RunnablePassthrough.assign(context = lambda x: get_context(user_query))
             | prompt_response
             | llm3
     )
